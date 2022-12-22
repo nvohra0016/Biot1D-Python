@@ -15,14 +15,23 @@ from math import *
 # function definiton
 def grid(Nxcells, Ntcells, example_number):
   # domain specification (end points) based on example_number
-  if example_number <= 4:
+  if example_number <= 3:
     a = 0
     b = 1.0
     Tend = 1.0
-  else:
+  elif example_number == 4:
     a = 0
-    b = 10
-    Tend = 24*365
+    b = 0.1
+    Tend = 24
+  elif example_number == 5:
+    a = 0
+    b = 1
+    Tend = 8760
+  else:
+    # custom values
+    a = 0
+    b = 1
+    Tend = 1
   # define grid using Nxcells
   if type(Nxcells) is int:
     M  = Nxcells

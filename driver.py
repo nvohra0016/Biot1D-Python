@@ -66,7 +66,9 @@ def driver(Nxcells, Ntcells, example_number):
   # get physical parameters
   lam_const, mu_const, betaf, phi, kappa, viscosity, alpha, rhof, rhos, G = parameters(xcc, t[0], example_number)
   # calculate average density
-  rho_avg = phi * rhof + (1 - phi) * rhos;
+  rho_avg = np.zeros((M,1))
+  for j in range(0,M-1):
+    rho_avg[j] = phi[j] * rhof + (1 - phi[j]) * rhos[j]
   # compute FE matrices
   # displacement stiffness matrix
   Auu = np.zeros((M+1, M+1)) # change to sparse (and all other matrices too)
@@ -332,28 +334,3 @@ def driver(Nxcells, Ntcells, example_number):
 if __name__ == '__main__':
   args = sys.argv[1:]
   globals()[args[0]](args[1], args[2], args[3])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

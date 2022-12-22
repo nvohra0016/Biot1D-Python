@@ -11,7 +11,7 @@ from math import *
 
 # function definiton
 def parameters(x, t, example_number): # x is cell centered grid
-  if example_number <= 4:
+  if example_number <= 3:
     lam_const = np.ones((x.size,1))
     mu_const = np.ones((x.size,1))
     betaf = 1.0
@@ -20,51 +20,23 @@ def parameters(x, t, example_number): # x is cell centered grid
     viscosity = 1.0
     alpha = 1.0
     rhof = 1.0
-    rhos = 1.0
+    rhos = 1.0 * np.ones((x.size,1))
     G = 0.0
-  elif example_number == 5:
-    # silt parameters
-    E = 10
-    nu = 0.35
-    lam_const = (E*nu)/((1 + nu)*(1-2*nu)) * np.ones((x.size,1))
-    mu_const = E/(2*(1+nu)) * np.ones((x.size,1))
-    kappa = 1e-14 * np.ones((x.size,1));
-    phi = 0.45 * np.ones((x.size,1));
-    betaf = 4.16e-4
-    viscosity = 2.7822e-13
-    alpha = 1.0
-    rhof = 1.0
-    rhos = 1.0
-    G = 0.0
-  elif example_number == 6:
+  elif example_number == 4:
     # sand parameters
-    E = 15
-    nu = 0.25
-    lam_const = (E*nu)/((1 + nu)*(1-2*nu)) * np.ones((x.size,1))
-    mu_const = E/(2*(1+nu)) * np.ones((x.size,1))
-    kappa = 1e-12 * np.ones((x.size,1));
-    phi = 0.30 * np.ones((x.size,1));
-    betaf = 4.16e-4
-    viscosity = 2.7822e-13
-    alpha = 1.0
-    rhof = 998.21 * (1/3600) * (1/3600) * 1e-6
-    rhos = 2650 * (1/3600) * (1/3600) * 1e-6
-    G = 1.27290528 * 1e8 * 0
-  elif example_number == 7:
-    # clay parameters
     E = 20
     nu = 0.30
     lam_const = (E*nu)/((1 + nu)*(1-2*nu)) * np.ones((x.size,1))
     mu_const = E/(2*(1+nu)) * np.ones((x.size,1))
-    kappa = 1e-17 * np.ones((x.size,1));
-    phi = 0.50 * np.ones((x.size,1));
+    kappa = 1e-17 * np.ones((x.size,1))
+    phi = 0.50 * np.ones((x.size,1))
     betaf = 4.16e-4
     viscosity = 2.7822e-13
     alpha = 1.0
     rhof = 998.21 * (1/3600) * (1/3600) * 1e-6
-    rhos = 2700 * (1/3600) * (1/3600) * 1e-6
-    G = 1.27290528 * 1e8 
-  elif example_number == 8:
+    rhos = 2650 * (1/3600) * (1/3600) * 1e-6 * np.ones((x.size,1))
+    G = 1.27290528 * 1e8 * 0
+  elif example_number == 5:
     # heterogeneous case sand/clay
     E_sand = 15
     nu_sand = 0.25
@@ -79,26 +51,29 @@ def parameters(x, t, example_number): # x is cell centered grid
     mu_const = np.ones((x.size,1))
     kappa = np.ones((x.size,1))
     phi = np.ones((x.size,1))
+    rhos = 1.0 * np.ones((x.size,1))
     for j in range(0,x.size):
-      if x[j] <= 0.6:
+      if x[j] >= 0.5:
         lam_const[j] = (E_sand*nu_sand)/((1 + nu_sand)*(1-2*nu_sand))
         mu_const[j] = E_sand/(2*(1+nu_sand))
         kappa[j] = kappa_sand
         phi[j] = phi_sand
+        rhos[j] = 2650 * (1/3600) * (1/3600) * 1e-6
       else:
         lam_const[j] = (E_clay*nu_clay)/((1 + nu_clay)*(1-2*nu_clay))
         mu_const[j] = E_clay/(2*(1+nu_clay))
         kappa[j] = kappa_clay
         phi[j] = phi_clay
+        rhos[j] = 2700 * (1/3600) * (1/3600) * 1e-6
         
     betaf = 4.16e-4
     viscosity = 2.7822e-13
     alpha = 1.0
-    rhof = 1.0
-    rhos = 1.0
-    G = 0.0
+    rhof = 998.21 * (1e-6 * (1/3600)*(1/3600))
+    G = 1.27290528e8
+    
   else:
-    print("Example not implemented")
+    print("Example not implemented. Input parameter/ grid values")
     
   return lam_const, mu_const, betaf, phi, kappa, viscosity, alpha, rhof, rhos, G
 
