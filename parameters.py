@@ -23,7 +23,7 @@ def parameters(x, t, example_number): # x is cell centered grid
     rhos = 1.0 * np.ones((x.size,1))
     G = 0.0
   elif example_number == 4:
-    # sand parameters
+    # clay parameters
     E = 20
     nu = 0.30
     lam_const = (E*nu)/((1 + nu)*(1-2*nu)) * np.ones((x.size,1))
@@ -34,8 +34,8 @@ def parameters(x, t, example_number): # x is cell centered grid
     viscosity = 2.7822e-13
     alpha = 1.0
     rhof = 998.21 * (1/3600) * (1/3600) * 1e-6
-    rhos = 2650 * (1/3600) * (1/3600) * 1e-6 * np.ones((x.size,1))
-    G = 1.27290528 * 1e8 * 0
+    rhos = 2700 * (1/3600) * (1/3600) * 1e-6 * np.ones((x.size,1))
+    G = 1.27290528 * 1e8 
   elif example_number == 5:
     # heterogeneous case sand/clay
     E_sand = 15

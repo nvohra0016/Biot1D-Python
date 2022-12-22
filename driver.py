@@ -57,7 +57,14 @@ def driver(Nxcells, Ntcells, example_number):
   a, b, h, M, xcc, xn, tau, t, Tend = grid(Nxcells, Ntcells, example_number)
   
   # set boundary flags [M, M, H, H]
-  BC = np.array([1, 0, 0, 1])
+  if example_number == 1:
+    BC = np.array([0, 0, 0, 0])
+  elif example_number == 2:
+    BC = np.array([1, 0, 1, 0])
+  elif example_number == 3:
+    BC = np.array([1, 1, 1, 1])
+  elif example_number >= 4:
+    BC = np.array([1, 0, 0, 1])
   # boundary flags
   Neum_ua = BC[0]
   Neum_ub = BC[1]
@@ -184,6 +191,8 @@ def driver(Nxcells, Ntcells, example_number):
   # initialize values/ vectors
   # initial fluid content
   etaf = np.multiply(betaf*phi, exact_p(xcc,t[0], example_number)) + alpha*exact_du(xcc, t[0], example_number)
+  if example_number >= 4:
+    etaf = np.multiply(betaf*phi*rhof*G, xcc)
   # boundary/ source terms
   pressure_boundary = np.zeros((free_nodes_qf.size,1))
   # settlement
@@ -312,7 +321,7 @@ def driver(Nxcells, Ntcells, example_number):
   plt.savefig('Output/flux.png', dpi = 200)
   print("flux outputted")
   # plot settlement
-  if example_number >= 5:
+  if example_number >= 4:
     print('Maximum settlement: '+str(settlement[-1]))
     fig, ax = plt.subplots()
 

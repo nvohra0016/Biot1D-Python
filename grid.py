@@ -52,7 +52,7 @@ def grid(Nxcells, Ntcells, example_number):
     for j in range(0,el_nodes.size - 1):
       xcc[j] = (el_nodes[j] + el_nodes[j+1])/2
     #
-  
+    
   # define time step tau using Ntcells
   tau = (Tend - 0)/Ntcells
   t = np.arange(0,Tend+tau,tau)[:,np.newaxis]
