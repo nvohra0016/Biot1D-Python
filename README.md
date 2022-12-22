@@ -21,8 +21,8 @@ More examples and the complete documentation can be found in the MATLAB implemen
 
 This research was partially supported by NSF DMS-1912938 "Modeling with Constraints and Phase Transitions in Porous Media" and NSF DMS-1522734 "Phase transitions in porous media across multiple scales"; PI: Dr. Malgorzata Peszynska. 
 
-## Python code
-The code is also available in MATLAB here 
+## MATLAB code
+The code is also available in MATLAB here [https://github.com/nvohra0016/Biot1D-MATLAB](https://github.com/nvohra0016/Biot1D-MATLAB)
 
 ## License
 
