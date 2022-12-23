@@ -1,0 +1,6 @@
+.DS_Store
+__pycache__
+Output
+
+ext_sources/__pycache__
+analytical_solutions/__pycache__

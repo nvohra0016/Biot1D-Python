@@ -53,7 +53,7 @@ def driver(Nxcells, Ntcells, example_number):
   example_number = int(example_number)
   # spatial/temporal grid parameters
   #  construct/ extract grid
-  # a, b, h, M, xcc, xn, tau, t = grid(np.array([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]), 3)
+  #a, b, h, M, xcc, xn, tau, t, Tend = grid(np.array([0, 0.05, 0.1, 0.15, 0.2, 0.4, 0.6, 0.8, 0.9, 0.95, 1.0]), 10, 2)
   a, b, h, M, xcc, xn, tau, t, Tend = grid(Nxcells, Ntcells, example_number)
   
   # set boundary flags [M, M, H, H]
@@ -127,7 +127,7 @@ def driver(Nxcells, Ntcells, example_number):
   # Mechanics
   G_vector_M = np.zeros((M+1,1))
   for j in range(1,M):
-    G_vector_M[j] = rho_avg[j] * (1/2) * (h[j-1] + h[j]) * G
+    G_vector_M[j] = (1/2) * (rho_avg[j-1] * h[j-1] +  rho_avg[j] * h[j] ) * G
 
   G_vector_M[0] = rho_avg[0] * (1/2) * h[0] * G
   G_vector_M[M] = rho_avg[M-1] * (1/2) * h[M-1] * G
@@ -190,8 +190,9 @@ def driver(Nxcells, Ntcells, example_number):
   A = np.block([[Auu, -alpha*Apu], [-alpha*Aup, -Mpp - tau*Aqfp.dot(Mqfqfinv).dot(Apqf)]])
   # initialize values/ vectors
   # initial fluid content
-  etaf = np.multiply(betaf*phi, exact_p(xcc,t[0], example_number)) + alpha*exact_du(xcc, t[0], example_number)
-  if example_number >= 4:
+  if example_number <= 3:
+    etaf = np.multiply(betaf*phi, exact_p(xcc,t[0], example_number)) + alpha*exact_du(xcc, t[0], example_number)
+  elif example_number >= 4:
     etaf = np.multiply(betaf*phi*rhof*G, xcc)
   # boundary/ source terms
   pressure_boundary = np.zeros((free_nodes_qf.size,1))
@@ -256,7 +257,10 @@ def driver(Nxcells, Ntcells, example_number):
     # settlement values
     settlement[n] = U[0]
   # time loop ends
-
+  # print array
+  print("pressure: ", P)
+  print(" --------- ")
+  print("displacement: ", U)
   # plot solution
   # plot displacement
   fig, ax = plt.subplots()
