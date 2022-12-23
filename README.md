@@ -14,7 +14,7 @@ To run example 4:
 
 ``` python driver.py driver 20 100 4 ```
 
-More examples and the complete documentation can be found in the MATLAB implementation [Documentation](https://github.com/nvohra0016/Biot1D-MATLAB/blob/452e0725a63db48f469df6ea6edb58c15e7215f8/Documentation.pdf).
+More examples and the information on the mathematical formulation can be found in the MATLAB implementation [Documentation](https://github.com/nvohra0016/Biot1D-MATLAB/blob/452e0725a63db48f469df6ea6edb58c15e7215f8/Documentation.pdf).
 
 
 ## Acknowledgement 
