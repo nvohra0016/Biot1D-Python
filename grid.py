@@ -26,7 +26,7 @@ def grid(Nxcells, Ntcells, example_number):
   elif example_number == 5:
     a = 0
     b = 1
-    Tend = 8760
+    Tend = 24
   else:
     # custom values
     a = 0
