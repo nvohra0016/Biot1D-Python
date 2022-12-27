@@ -4,3 +4,6 @@ Output
 
 ext_sources/__pycache__
 analytical_solutions/__pycache__
+
+ext_sources/.DS_Store
+analytical_solutions/.DS_Store
